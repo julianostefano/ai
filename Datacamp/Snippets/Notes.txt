@@ -1,0 +1,161 @@
+Why we like flat files and the Zen of Python
+In PythonLand, there are currently hundreds of Python Enhancement Proposals, commonly referred to as PEPs. PEP8, for example, is a standard style guide for Python, written by our sensei Guido van Rossum himself. It is the basis for how we here at DataCamp ask our instructors to style their code. Another one of my favorites is PEP20, commonly called the Zen of Python. Its abstract is as follows:
+
+Long time Pythoneer Tim Peters succinctly channels the BDFL's guiding principles for Python's design into 20 aphorisms, only 19 of which have been written down.
+
+If you don't know what the acronym BDFL stands for, I suggest that you look here. You can print the Zen of Python in your shell by typing import this into it! You're going to do this now and the 5th aphorism (line) will say something of particular interest.
+
+The question you need to answer is: what is the 5th aphorism of the Zen of Python?
+
+https://github.com/python/peps/blob/main/peps/pep-0020.rst
+
+
+
+https://docs.python.org/3.3/glossary.html#term-bdfl
+
+
+import this
+
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+In [2]:
+
+
+
+
+-------------------------------------------------------------------------------------------
+
+Using NumPy to import flat files
+In this exercise, you're now going to load the MNIST digit recognition dataset using the numpy function loadtxt() and see just how easy it can be:
+
+The first argument will be the filename.
+The second will be the delimiter which, in this case, is a comma.
+The MNIST dataset is a collection of handwritten digits from 0 to 9,
+frequently used in the field of machine learning. It serves as a benchmark for evaluating algorithm performance in recognizing
+and classifying these numbers.
+
+_____________________________________________________________________________________________________
+
+
+Customizing your NumPy import
+What if there are rows, such as a header, that you don't want to import? What if your file has a delimiter other than a comma? What if you only wish to import particular columns?
+
+There are a number of arguments that np.loadtxt() takes that you'll find useful:
+
+delimiter changes the delimiter that loadtxt() is expecting.
+You can use ',' for comma-delimited.
+You can use '\t' for tab-delimited.
+skiprows allows you to specify how many rows (not indices) you wish to skip.
+usecols takes a list of the indices of the columns you wish to keep.
+The file that you'll be importing, digits_header.txt, has a header and is tab-delimited.
+
+
+-------------------------------------------------------------------------------------------
+
+Sea Slug Data
+
+http://www.stat.ucla.edu/~rgould/datasets/aboutseaslugs.html
+
+
+This is a sea slug.  It is about 1/4 of an inch  long.   Dr. Patrick Krug is a marine biologist at UCLA who makes a living studying these creatures. He has generously donated data from his recent study.,
+ 
+
+(If you want to learn more about sea slugs, check the Australian Museum Sea Slug Forum. You can even view a picture of the sea slug of the week.)
+ 
+
+Here's what Dr. Krug says about the data set:
+ 
+
+I study a small sea slug, which eats one kind of seaweed in bays along this coast.  The slugs produce thousands of microscopie larvae which swim off into the ocean.  These larvae must eventually locate and settle onto a patch of the correct seaweed, before turning into little slugs and beginning their adult life.  I have found that these tiny larvae can "smell" a patch of seaweed when they are passing over it in the water, by detecting chemicals that slowly leach out of the seaweed.  I wanted to design an experiment to see whether the ability of larvae to detect a patch of seaweed changed over time during a high tide.  During low tide, the seaweed soaks in small pools of water, which become very concentrated with the "seaweed smell."  My hypothesis was that when the high tide initially covers the seaweed, the water form the pools would mix with the incoming ocean water and provide a strong signal to larvae to settle to the bottom and find the seaweed.  Later on, when the smell of the seaweed has been diluted by the rising water of the high tide, larvae would be less able to detect the seaweed as they passed above it.
+To test this hypothesis, I sampled water with a syringe above a patch of seaweed starting at "time 0", when the rising waters of a high tide initially covered the seaweed.  I then sampled water in the same manner every 5 minutes for half an hour, as the water level rose higher and higher due to the incoming tide.  I then measured the ability of larvae to detect the chemicals from the seaweed using a laboratory assay, by measuring the percentage of larvae in a given water sample that dropped to the bottom and underwent metamorphosis, turning into a little slug.  I used 6 replicates for each sample of water (i.e., for each time point), and a sample of water collected far away form the patch of seaweed as a negative control.  I want to statistically test whether there is significantly higher metamorphosis in the first one or two water samples I collected, when the "seaweed smell" should have been the most concentrated above the seaweed, compared with subsequent time points, when the smell should have been diluted by the riding tide.
+ 
+
+Here are the data.  Each row represents a sample of water.  The first column contains the time the sample was collected (measured in minutes since the start of high tide.)  The second number is the percentage of larvae that underwent metamorphosis (which is a function of their ability to detect the chemicals from the seaweed.)
+Times with value 99 are the "negative control."
+WARNING:  Data are the property of Patrick Krug and cannot be used without his permission.  Contact pkrug@protos.lifesci.ucla.edu.
+
+Here's where the samples were collected and a picture of the larvae and eggs:
+
+----------------------------------------------------------------------------------------------------------------------
+
+Importing different datatypes
+The file seaslug.txt
+
+has a text header, consisting of strings
+is tab-delimited.
+This data consists of the percentage of sea slug larvae that had metamorphosed in a given time period. Read more here.
+
+Due to the header, if you tried to import it as-is using np.loadtxt(), Python would throw you a ValueError and tell you that it could not convert string to float. There are two ways to deal with this: firstly, you can set the data type argument dtype equal to str (for string).
+
+Alternatively, you can skip the first row as we have seen before, using the skiprows argument.
+
+________________________________________________
+
+
+Using pandas to import flat files as DataFrames (1)
+In the last exercise, you were able to import flat files containing columns with different datatypes as numpy arrays.
+ However, the DataFrame object in pandas is a more appropriate structure in which to store such data and, thankfully, 
+ we can easily import files of mixed data types as DataFrames using the pandas functions read_csv() and read_table().
+
+---------------------------------------------------------------
+
+Using pandas to import flat files as DataFrames (2)
+In the last exercise, you were able to import flat files into a pandas DataFrame. As a bonus, it is then straightforward to retrieve 
+the corresponding numpy array using the method .to_numpy(). You'll now have a chance to do this using the MNIST dataset,
+which is available as digits.csv.
+
+There are a number of arguments that pd.read_csv() takes that you'll find useful for this exercise:
+
+nrows allows you to specify how many rows to read from the file. For example, nrows=10 will only import the first 10 rows.
+header accepts row numbers to use as the column labels and marks the start of the data. If the file does not contain a header row,
+you can set header=None, and pandas will automatically assign integer column labels starting from 0 (e.g., 0, 1, 2, …).
+
+
+-------------------------------------------------------------
+
+
+Customizing your pandas import
+The pandas package is great at dealing with many of the issues you will encounter when importing data as a data scientist, 
+such as comments occurring in flat files, empty lines and missing values (NA or NaN). To wrap up this chapter, 
+you're going to import a corrupted copy of the Titanic dataset titanic_corrupt.txt, which contains comments after the character '#', 
+and is tab-delimited.
+
+Key arguments for pd.read_csv() include:
+
+sep sets the expected delimiter.
+You can use ',' for comma-delimited.
+You can use '\t' for tab-delimited.
+comment takes characters that comments occur after in the file, indicating that any text starting with these characters should be ignored.
+na_values takes a list of strings to identify as NA/NaN. By default, some values are already recognized as NA/NaN. 
+Providing this argument will supply additional values.
+
+
+------------------------------
+
+
+Loading a pickled file
+There are a number of datatypes that cannot be saved easily to flat files, such as lists and dictionaries. If you want your files to be human readable, you may want to save them as text files in a clever manner. JSONs, which you will see in a later chapter, are appropriate for Python dictionaries.
+
+However, if you merely want to be able to import them into Python, you can serialize them. All this means is converting the object into a sequence of bytes, or a bytestream.
+
+In this exercise, you'll import the pickle package, open a previously pickled data structure from a file and load it.
+
