@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 # Define plot_pop()
-def plot_pop(filemame, country_code):
+def plot_pop(filename, country_code):
 
     # Initialize reader object: urb_pop_reader
     urb_pop_reader = pd.read_csv(filename, chunksize=1000)
